@@ -32,11 +32,25 @@ class DateTest {
     }
 
     @Test
-    void changeDateTest()
+    void changeDateTestNegative()
     {
-        date.changeDate(365);
-        Date newDate = new Date(1, 1, 2024);
-        assertEquals();
+        date.changeDate(-4523);
+        Date newDate = new Date(14, 8, 2010);
+        assertEquals(date.compareTo(newDate), 0);
+    }
 
+    @Test
+    void changeDateTestPositive()
+    {
+        date.changeDate(2000);
+        Date newDate = new Date(23, 6, 2028);
+        assertEquals(date.compareTo(newDate), 0);
+    }
+    @Test
+    void changeDateTestZero()
+    {
+        date.changeDate(0);
+        Date newDate = new Date(1, 1, 2023);
+        assertEquals(date.compareTo(newDate), 0);
     }
 }
