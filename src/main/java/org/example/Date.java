@@ -89,13 +89,14 @@ public class Date extends AbsDate implements Comparable {
     @Override
     public int compareTo(Object date)
     {
-        if (getYear() - year == 0)
-            if (getMonth() - month == 0)
-                return getDay() - day;
+        date = (Date) date;
+        if (getYear() - ((Date) date).getYear() == 0)
+            if (getMonth() - ((Date) date).getMonth() == 0)
+                return getDay() - ((Date) date).getDay();
             else
-                return getMonth() - month;
+                return getMonth() - ((Date) date).getMonth();
         else
-            return getYear() - year;
+            return getYear() - ((Date) date).getYear();
     }
 
     /**
