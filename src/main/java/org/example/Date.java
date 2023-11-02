@@ -122,9 +122,9 @@ public class Date extends AbsDate implements Comparable {
     public int calcDays()
     {
         int days = this.day;
-        int month = this.month;
-        int year = this.year;
-        while(month > 1)
+        int month = --this.month;
+        int year = --this.year;
+        while(month >= 1)
         {
             days += getDayCount(month, year);
             month--;
@@ -160,7 +160,7 @@ public class Date extends AbsDate implements Comparable {
     {
         //pointers to the cuurent month and year
         int currMonth = 1;
-        int currYear = 0;
+        int currYear = 1;
         while(days > getDayCount(currMonth, currYear))
         {
             days -= getDayCount(currMonth, currYear);
@@ -178,6 +178,85 @@ public class Date extends AbsDate implements Comparable {
         }
         Date newDate = new Date(days, currMonth, currYear);
         return newDate;
+    }
+
+    public void getWeekDays(String weekday, int year)
+    {
+        int desiredDay = 1;
+
+        switch (weekday.toLowerCase())
+        {
+            case "monday":
+            {
+                desiredDay = 1;
+                break;
+            }
+            case "tuesday":
+            {
+                desiredDay = 2;
+                break;
+            }
+            case "wednesday":
+            {
+                desiredDay = 3;
+                break;
+            }
+            case "thursday":
+            {
+                desiredDay = 4;
+                break;
+            }
+            case "friday":
+            {
+                desiredDay = 5;
+                break;
+            }
+            case "saturday":
+            {
+                desiredDay = 6;
+                break;
+            }
+            case "sunday":
+            {
+                desiredDay = 7;
+                break;
+            }
+
+        }
+
+        //subtracting to get the number of days since 1, 1, 1 (DMY) which is a Monday
+        Date firstDate = new Date(1, 1, year);
+        int firstDay = firstDate.calcDays();
+
+        //balancing the last day of 2010
+        Date lastDate = new Date(31, 12, year);
+        int lastDay = lastDate.calcDays();
+
+        // getting the weekday for the firstDay
+        int firstWeekDay = firstDay % 7;
+
+        //compensating to get the first desired day
+        int compensation = desiredDay - firstWeekDay; // should be a var to hold the numerical rep of a weekday
+
+        // if the compensation is positive, meaning the closest desired day is before the firstDate, get the next one
+        if (compensation < 0)
+        {
+            compensation = (7 + compensation);
+        }
+
+        //compensating firstDay
+        firstDay += compensation;
+
+
+        for(int i = firstDay; i < lastDay; i += 7)
+        {
+
+            System.out.println(convertDate(i).renderISO());
+        }
+
+
+
+
     }
 
 }

@@ -5,10 +5,8 @@ package org.example;
 public class Main {
     public static void main(String[] args) {
 
-        Date date = new Date(1, 1, 2023);
-        System.out.println(date.renderISO());
-        date.changeDate(2000);
-        System.out.println(date.renderISO());
+        Date dummy = new Date(1, 1, 2010);
+        dummy.getWeekDays(args[0], Integer.parseInt(args[1]));
 
     }
 }
