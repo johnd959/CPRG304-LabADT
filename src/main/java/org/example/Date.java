@@ -119,11 +119,15 @@ public class Date extends AbsDate implements Comparable {
 
     }
 
+    /**
+     * Calculates the total number days since 1, 1, 1 DMY for the date given
+     * @return int days
+     */
     public int calcDays()
     {
         int days = this.day;
-        int month = --this.month;
-        int year = --this.year;
+        int month = this.month - 1;
+        int year = this.year - 1;
         while(month >= 1)
         {
             days += getDayCount(month, year);
@@ -156,6 +160,11 @@ public class Date extends AbsDate implements Comparable {
         return days;
     }
 
+    /**
+     * Converts the given number of days back into a date object with 1, 1, 1, DMY as a reference point.
+     * @param days
+     * @return
+     */
     public Date convertDate(int days)
     {
         //pointers to the cuurent month and year
@@ -180,6 +189,11 @@ public class Date extends AbsDate implements Comparable {
         return newDate;
     }
 
+    /**
+     * Prints every single date that falls upom the given weekday for the given year.
+     * @param weekday
+     * @param year
+     */
     public void getWeekDays(String weekday, int year)
     {
         int desiredDay = 1;
